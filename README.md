@@ -18,3 +18,6 @@ RN
 7. O aereporto possuirá somente uma pista de pouso
 8. O aeporto suporta até 10 aviões aguardando para pousar
 9. A pista de pouso possuirá 3000 metros de comprimento
+10. Velocidade mínima no ar é de 240km/h
+11. O fim de uma rota de aproximação é a entrada de uma rota de pouso/circular
+12. Uma rota terá as coordeadas de entrada, saída e um tamanho
