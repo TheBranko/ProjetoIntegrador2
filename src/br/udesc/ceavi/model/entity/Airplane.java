@@ -1,9 +1,9 @@
 package br.udesc.ceavi.model.entity;
 
 /**
- * @author lucas.adriano
+ * @author lucas.adriano, felipe lana
  */
-public class Plane {
+public class Airplane {
     
     private Route route;
  
@@ -11,6 +11,7 @@ public class Plane {
     private double averageFuel;
     private double landingSpeed;
     private double currentSpeed;
+    private int score;
 
     public double getFuelCapacity() {
         return fuelCapacity;
@@ -50,5 +51,13 @@ public class Plane {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
