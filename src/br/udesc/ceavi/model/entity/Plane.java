@@ -3,14 +3,18 @@ package br.udesc.ceavi.model.entity;
 /**
  * @author lucas.adriano
  */
-public class Plane {
+public class Plane implements Comparable<Plane> {
     
     private Route route;
  
+    private int score;
+    
     private double fuelCapacity;
     private double averageFuel;
-    private double landingSpeed;
     private double currentSpeed;
+    private double currentHeight;
+    
+    private Coordinate currentLocation;
 
     public double getFuelCapacity() {
         return fuelCapacity;
@@ -28,14 +32,6 @@ public class Plane {
         this.averageFuel = averageFuel;
     }
 
-    public double getLandingSpeed() {
-        return landingSpeed;
-    }
-
-    public void setLandingSpeed(double landingSpeed) {
-        this.landingSpeed = landingSpeed;
-    }
-
     public double getCurrentSpeed() {
         return currentSpeed;
     }
@@ -50,5 +46,37 @@ public class Plane {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public double getCurrentHeight() {
+        return currentHeight;
+    }
+
+    public void setCurrentHeight(double currentHeight) {
+        this.currentHeight = currentHeight;
+    }
+    
+    public Coordinate getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Coordinate currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    @Override
+    public int compareTo(Plane o) {
+        if (this.getScore() == o.getScore()) {
+            return 0;
+        }
+        return this.getScore() > o.getScore() ? -1 : 1;
     }
 }
