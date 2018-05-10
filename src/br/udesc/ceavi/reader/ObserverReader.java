@@ -8,5 +8,4 @@ import br.udesc.ceavi.model.entity.Plane;
 public interface ObserverReader {
  
     public void planeRead(Plane plane);
-    
 }
