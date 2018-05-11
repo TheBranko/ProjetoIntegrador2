@@ -1,6 +1,6 @@
 package br.udesc.ceavi.controlller;
 
-import br.udesc.ceavi.model.entity.Plane;
+import br.udesc.ceavi.model.entity.Airplane;
 import java.util.PriorityQueue;
 
 /**
@@ -8,6 +8,6 @@ import java.util.PriorityQueue;
  */
 public class TowerControl {
  
-    private PriorityQueue<Plane> planes = new PriorityQueue();
+    private PriorityQueue<Airplane> planes = new PriorityQueue();
     
 }

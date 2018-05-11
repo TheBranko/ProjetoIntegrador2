@@ -3,7 +3,7 @@ package br.udesc.ceavi.model.entity;
 /**
  * @author lucas.adriano, felipe lana
  */
-public class Plane implements Comparable<Plane> {
+public class Airplane implements Comparable<Airplane> {
 
     private Route route;
 
@@ -73,7 +73,7 @@ public class Plane implements Comparable<Plane> {
     }
 
     @Override
-    public int compareTo(Plane o) {
+    public int compareTo(Airplane o) {
         if (this.getScore() == o.getScore()) {
             return 0;
         }
