@@ -1,19 +1,19 @@
 package br.udesc.ceavi.model.entity;
 
 /**
- * @author lucas.adriano
+ * @author lucas.adriano, felipe lana
  */
 public class Plane implements Comparable<Plane> {
-    
+
     private Route route;
- 
+
     private int score;
-    
+
     private double fuelCapacity;
     private double averageFuel;
     private double currentSpeed;
     private double currentHeight;
-    
+
     private Coordinate currentLocation;
 
     public double getFuelCapacity() {
@@ -63,7 +63,7 @@ public class Plane implements Comparable<Plane> {
     public void setCurrentHeight(double currentHeight) {
         this.currentHeight = currentHeight;
     }
-    
+
     public Coordinate getCurrentLocation() {
         return currentLocation;
     }

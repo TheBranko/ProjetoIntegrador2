@@ -1,7 +1,7 @@
 package br.udesc.ceavi;
 
 /**
- * @author lucas.adriano
+ * @author lucas.adriano, felipe lana
  */
 public class Main {
  
