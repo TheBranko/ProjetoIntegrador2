@@ -1,6 +1,6 @@
 package br.udesc.ceavi.reader;
 
-import br.udesc.ceavi.model.entity.Airplane;
+import br.udesc.ceavi.model.airplane.Airplane;
 
 /**
  * @author lucas.adriano

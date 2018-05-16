@@ -1,4 +1,7 @@
-package br.udesc.ceavi.model.entity;
+package br.udesc.ceavi.model.airplane;
+
+import br.udesc.ceavi.model.routes.Route;
+import br.udesc.ceavi.model.routes.Coordinate;
 
 /**
  * @author lucas.adriano, felipe lana
@@ -72,6 +75,7 @@ public class Airplane implements Comparable<Airplane> {
         this.currentLocation = currentLocation;
     }
 
+    
     @Override
     public int compareTo(Airplane o) {
         if (this.getScore() == o.getScore()) {

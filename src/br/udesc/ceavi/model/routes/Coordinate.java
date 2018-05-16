@@ -1,4 +1,4 @@
-package br.udesc.ceavi.model.entity;
+package br.udesc.ceavi.model.routes;
 
 /**
  * @author lucas.adriano, felipe lana
@@ -7,6 +7,11 @@ public class Coordinate {
  
     private double latitude;
     private double longitude;
+
+    public Coordinate(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public double getLatitude() {
         return latitude;
@@ -23,4 +28,11 @@ public class Coordinate {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return latitude + "," + longitude;
+    }
+    
+    
 }

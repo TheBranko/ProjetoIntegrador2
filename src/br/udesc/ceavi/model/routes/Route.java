@@ -1,32 +1,32 @@
-package br.udesc.ceavi.model.entity;
+package br.udesc.ceavi.model.routes;
 
 /**
- * @author lucas.adriano, felipe lana
+ * @author lucas.adriano, felipe lana, Kons
  */
 abstract public class Route {
  
-    private Coordinate entryRoute;
-    private Coordinate exitRoute;
+    private Coordinate entryLocation;
+    private Coordinate exitLocation;
     
     private double entrySpeed;
     private double exitSpeed;
     
     private double length;
 
-    public Coordinate getEntryRoute() {
-        return entryRoute;
+    public Coordinate getEntryLocation() {
+        return entryLocation;
     }
 
-    public void setEntryRoute(Coordinate entryRoute) {
-        this.entryRoute = entryRoute;
+    public void setEntryLocation(Coordinate entryRoute) {
+        this.entryLocation = entryRoute;
     }
 
-    public Coordinate getExitRoute() {
-        return exitRoute;
+    public Coordinate getExitLocation() {
+        return exitLocation;
     }
 
-    public void setExitRoute(Coordinate exitRoute) {
-        this.exitRoute = exitRoute;
+    public void setExitLocation(Coordinate exitRoute) {
+        this.exitLocation = exitRoute;
     }
 
     public double getEntrySpeed() {
