@@ -8,7 +8,8 @@ import java.io.IOException;
  */
 public class Main {
  
-    public static void main(String[] args) throws IOException {
-        TowerControl controll = new TowerControl();
+    public static void main(String[] args) throws IOException, Exception {
+        
+        TowerControl tc = new TowerControl();
     }
 }

@@ -4,15 +4,15 @@ import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.Coordinate;
 
 /**
- * @author lucas.adriano, felipe lana
+ * @author lucas.adriano, felipe lana, Kons
  */
 public class Airplane implements Comparable<Airplane> {
 
     private Route route;
 
-    private int score;
+    private double score;
 
-    private double fuelCapacity;
+    private double totalFuel; //alterar o que estava como fuelCapacity para totalFuel
     private double averageFuel;
     private double currentSpeed;
     private double currentHeight;
@@ -20,11 +20,11 @@ public class Airplane implements Comparable<Airplane> {
     private Coordinate currentLocation;
 
     public double getFuelCapacity() {
-        return fuelCapacity;
+        return totalFuel;
     }
 
     public void setFuelCapacity(double fuelCapacity) {
-        this.fuelCapacity = fuelCapacity;
+        this.totalFuel = fuelCapacity;
     }
 
     public double getAverageFuel() {
@@ -51,14 +51,15 @@ public class Airplane implements Comparable<Airplane> {
         this.route = route;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void calculateScore(double distanceToAirport) {
+        double quantoPodeVoar = totalFuel / averageFuel;
+        score = quantoPodeVoar - distanceToAirport;
     }
-
+    
     public double getCurrentHeight() {
         return currentHeight;
     }
@@ -82,5 +83,9 @@ public class Airplane implements Comparable<Airplane> {
             return 0;
         }
         return this.getScore() > o.getScore() ? -1 : 1;
+    }
+    
+    public void move() {
+        double kmTravelled = currentSpeed * 3;
     }
 }

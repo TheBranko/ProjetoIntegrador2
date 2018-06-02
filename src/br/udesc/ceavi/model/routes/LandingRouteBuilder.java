@@ -3,6 +3,8 @@ package br.udesc.ceavi.model.routes;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -10,7 +12,7 @@ import java.io.FileReader;
  */
 public class LandingRouteBuilder extends RouteBuilder {
     
-    public LandingRouteBuilder() throws FileNotFoundException {
+    public LandingRouteBuilder() throws FileNotFoundException, IOException {
         route = new LandingRoute();
         reader = new BufferedReader(new FileReader("LandingRoutes.txt"));
     }
