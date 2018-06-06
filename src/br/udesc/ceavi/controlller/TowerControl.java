@@ -17,6 +17,7 @@ public class TowerControl {
         data = new ControllerData();
         Airplane a = data.buildAirplane();
         double distance = calculateDistance(a.getCurrentLocation(), data.getLandingRoute().getEntryLocation());
+        a.move();
         a.calculateScore(distance);
         
     }

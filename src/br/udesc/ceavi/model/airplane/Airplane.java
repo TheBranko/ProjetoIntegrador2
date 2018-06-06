@@ -87,5 +87,49 @@ public class Airplane implements Comparable<Airplane> {
     
     public void move() {
         double kmTravelled = currentSpeed * 3;
-    }
+//        double x1 = Math.toRadians(currentLocation.getLongitude());
+//        double x2 = Math.toRadians(route.getExitLocation().getLongitude());
+//        double y1 = Math.toRadians(currentLocation.getLatitude());
+//        double y2 = Math.toRadians(route.getExitLocation().getLatitude());
+        
+        double x1 = currentLocation.getLongitude();
+        double x2 = route.getExitLocation().getLongitude();
+        double y1 = currentLocation.getLatitude();
+        double y2 = route.getExitLocation().getLatitude();
+        
+        System.out.println("(" + x1 + "," + y1 + ") (" + x2 + "," + y2 + ")");
+                
+
+        //Calculo do Rumo (r)
+        double deltaX = x2 - x1;
+        double deltaY = y2 - y1;
+        
+        double rumo = Math.abs(Math.atan(deltaX / deltaY));
+//        double rumo = Math.abs(Math.atan(Math.toRadians(3) / Math.toRadians(-6)));
+        System.out.println("rumo = " + rumo);
+        
+        double azimute = 0;
+        if(deltaX >= 0 && deltaY >= 0) {
+            azimute = rumo;
+        } else if(deltaX >= 0 && deltaY < 0) {
+            azimute = 180 - rumo;
+        } else if(deltaX < 0 && deltaY < 0) {
+            azimute = rumo + 180;
+        } else if(deltaX < 0 && deltaY >= 0) {
+            azimute = 360 - rumo;
+        }
+        
+        //Projeção cartográfica 
+        double projecaoX = kmTravelled * Math.sin(azimute);
+        double projecaoY = kmTravelled * Math.cos(azimute);
+        
+        double newX = Math.toRadians(currentLocation.getLongitude()) + projecaoX; 
+        double newY = Math.toRadians(currentLocation.getLatitude()) + projecaoY;
+        
+        System.out.println(currentSpeed);
+        System.out.println(kmTravelled);
+        System.out.println(newX + " " + newY);
+        currentLocation.setLongitude(newX);
+        currentLocation.setLatitude(newY);
+    } 
 }
