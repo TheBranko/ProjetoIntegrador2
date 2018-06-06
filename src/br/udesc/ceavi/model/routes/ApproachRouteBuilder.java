@@ -17,16 +17,18 @@ public class ApproachRouteBuilder extends RouteBuilder {
 
     @Override
     protected void buildEntryLocation() {
+//        System.out.println(lineInfo[0]);
+//        System.out.println(lineInfo[1]);
         double latitude = Double.parseDouble(lineInfo[0]);
         double longitude = Double.parseDouble(lineInfo[1]);
-        route.setEntryLocation(new Coordinate(latitude, longitude));
+        route.setEntryLocation(new Coordinate(longitude, latitude));
     }
 
     @Override
     protected void buildExitLocation() {
         double latitude = Double.parseDouble(lineInfo[2]);
         double longitude = Double.parseDouble(lineInfo[3]);
-        route.setExitLocation(new Coordinate(latitude, longitude));
+        route.setExitLocation(new Coordinate(longitude, latitude));
     }
 
     @Override
@@ -36,7 +38,7 @@ public class ApproachRouteBuilder extends RouteBuilder {
 
     @Override
     protected void buildExitSpeed() {
-        route.setEntrySpeed(Double.parseDouble(lineInfo[5]));
+        route.setExitSpeed(Double.parseDouble(lineInfo[5]));
     }
 
     @Override

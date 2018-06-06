@@ -17,6 +17,7 @@ public abstract class RouteBuilder {
         String line;
         if((line = reader.readLine()) != null) {
             lineInfo = line.split(";");
+            System.out.println(lineInfo.length);
             return true;
         } 
         return false;
@@ -33,7 +34,9 @@ public abstract class RouteBuilder {
     public abstract void startsNewRoute();
 
     void buildLength() {
-        //necessita implementação
+        double deltaX = route.getExitLocation().getLongitude() - route.getEntryLocation().getLongitude();
+        double deltaY = route.getExitLocation().getLatitude() - route.getEntryLocation().getLatitude();
+        route.setLength(Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
     }
 
     public Route getRoute() {

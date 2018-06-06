@@ -23,8 +23,8 @@ public class TowerControl {
     }
     
     public double calculateDistance(Coordinate a, Coordinate b) {
-        double x = Math.abs(a.getLatitude() - b.getLatitude());
-        double y = Math.abs(a.getLongitude() - b.getLongitude());
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        double deltaY = b.getLatitude() - a.getLatitude();
+        double deltaX = b.getLongitude() - a.getLongitude();
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     }
 }   

@@ -13,26 +13,26 @@ public class Airplane implements Comparable<Airplane> {
     private double score;
 
     private double totalFuel; //alterar o que estava como fuelCapacity para totalFuel
-    private double averageFuel;
+    private double averageFuelConsumption;
     private double currentSpeed;
     private double currentHeight;
 
     private Coordinate currentLocation;
 
-    public double getFuelCapacity() {
+    public double getTotalFuel() {
         return totalFuel;
     }
 
-    public void setFuelCapacity(double fuelCapacity) {
-        this.totalFuel = fuelCapacity;
+    public void setTotalFuel(double totalFuel) {
+        this.totalFuel = totalFuel;
     }
 
     public double getAverageFuel() {
-        return averageFuel;
+        return averageFuelConsumption;
     }
 
-    public void setAverageFuel(double averageFuel) {
-        this.averageFuel = averageFuel;
+    public void setAverageFuelConsumption(double averageFuelConsumption) {
+        this.averageFuelConsumption = averageFuelConsumption;
     }
 
     public double getCurrentSpeed() {
@@ -56,7 +56,7 @@ public class Airplane implements Comparable<Airplane> {
     }
 
     public void calculateScore(double distanceToAirport) {
-        double quantoPodeVoar = totalFuel / averageFuel;
+        double quantoPodeVoar = totalFuel / averageFuelConsumption;
         score = quantoPodeVoar - distanceToAirport;
     }
     
@@ -86,28 +86,20 @@ public class Airplane implements Comparable<Airplane> {
     }
     
     public void move() {
-        double kmTravelled = currentSpeed * 3;
-//        double x1 = Math.toRadians(currentLocation.getLongitude());
-//        double x2 = Math.toRadians(route.getExitLocation().getLongitude());
-//        double y1 = Math.toRadians(currentLocation.getLatitude());
-//        double y2 = Math.toRadians(route.getExitLocation().getLatitude());
+        double metersTravelled = currentSpeed * 3;
         
         double x1 = currentLocation.getLongitude();
-        double x2 = route.getExitLocation().getLongitude();
         double y1 = currentLocation.getLatitude();
-        double y2 = route.getExitLocation().getLatitude();
         
-        System.out.println("(" + x1 + "," + y1 + ") (" + x2 + "," + y2 + ")");
+        double x2 = route.getExitLocation().getLongitude();
+        double y2 = route.getExitLocation().getLatitude();
                 
-
-        //Calculo do Rumo (r)
+        //Calculo do Rumo
         double deltaX = x2 - x1;
         double deltaY = y2 - y1;
+        double rumo = Math.abs(Math.toDegrees(Math.atan(deltaX / deltaY)));
         
-        double rumo = Math.abs(Math.atan(deltaX / deltaY));
-//        double rumo = Math.abs(Math.atan(Math.toRadians(3) / Math.toRadians(-6)));
-        System.out.println("rumo = " + rumo);
-        
+        //Calculo do azimute
         double azimute = 0;
         if(deltaX >= 0 && deltaY >= 0) {
             azimute = rumo;
@@ -120,15 +112,12 @@ public class Airplane implements Comparable<Airplane> {
         }
         
         //Projeção cartográfica 
-        double projecaoX = kmTravelled * Math.sin(azimute);
-        double projecaoY = kmTravelled * Math.cos(azimute);
+        double projecaoX = metersTravelled * Math.sin(Math.toRadians(azimute));
+        double projecaoY = metersTravelled * Math.cos(Math.toRadians(azimute));
         
-        double newX = Math.toRadians(currentLocation.getLongitude()) + projecaoX; 
-        double newY = Math.toRadians(currentLocation.getLatitude()) + projecaoY;
+        double newX = currentLocation.getLongitude() + projecaoX; 
+        double newY = currentLocation.getLatitude() + projecaoY;
         
-        System.out.println(currentSpeed);
-        System.out.println(kmTravelled);
-        System.out.println(newX + " " + newY);
         currentLocation.setLongitude(newX);
         currentLocation.setLatitude(newY);
     } 

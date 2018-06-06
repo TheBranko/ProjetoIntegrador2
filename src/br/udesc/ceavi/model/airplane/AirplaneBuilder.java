@@ -33,20 +33,20 @@ public class AirplaneBuilder {
         airplane.setRoute(route);
     }
 
-    void buildFuelCapacity() {
-        airplane.setFuelCapacity(Double.parseDouble(lineInfo[0]));
+    void buildTotalFuel() {
+        airplane.setTotalFuel(Double.parseDouble(lineInfo[0]));
     }
 
-    void buildAverageFuel() {
-        airplane.setAverageFuel(Double.parseDouble(lineInfo[1]));
+    void buildAverageFuelConsumption() {
+        airplane.setAverageFuelConsumption(Double.parseDouble(lineInfo[1]));
     }
 
     void buildCurrentSpeed() {
-        airplane.setCurrentSpeed(Double.parseDouble(lineInfo[2]));
+        airplane.setCurrentSpeed(airplane.getRoute().getEntrySpeed());
     }
 
     void buildCurrentHight() {
-        airplane.setCurrentHeight(Double.parseDouble(lineInfo[3]));
+        airplane.setCurrentHeight(Double.parseDouble(lineInfo[2]));
     }
 
     void buildCorrentLocation() {
