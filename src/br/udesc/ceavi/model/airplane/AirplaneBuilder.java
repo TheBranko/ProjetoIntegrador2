@@ -61,4 +61,13 @@ public class AirplaneBuilder {
         airplane = new Airplane();
     }
 
+    public void buildAcceleration() {
+        airplane.setAcceleration(Double.parseDouble(lineInfo[3]));
+    }
+
+    public void buildInclination() {
+        System.out.println(lineInfo[4]);
+        airplane.setInclination(Double.parseDouble(lineInfo[4]));
+    }
+
 }

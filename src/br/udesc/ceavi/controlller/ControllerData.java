@@ -42,12 +42,13 @@ public class ControllerData {
         airplaneBuilder = new AirplaneBuilder();
         airplaneDirector = new AirplaneDirector(airplaneBuilder);
         
-        Airplane a;
         if (airplaneBuilder.readLine()) {
             airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() - 1)));
-            a = airplaneBuilder.getAirplane();
-            airplaneBuilder.startsNewAirplane();
-            return a;
+            try {
+                return airplaneBuilder.getAirplane();
+            } finally {
+                airplaneBuilder.startsNewAirplane();
+            }
         } else {
             throw new Exception("All airplanes in the 'airplanex.txt' file have already been detected");
         }

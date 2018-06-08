@@ -24,6 +24,9 @@ RN
 12. O fim de uma rota de aproximação é a entrada de uma rota de pouso/circular
 13. Uma rota terá as coordeadas de entrada, saída, velocidades de entrada/saída e um tamanho
 14. O score dos aviões deverá ser recalculado a cada leitura (entrada) de um novo avião. Este processo deve ser executado a todo momento em segundo plano. Obs: provavelmente a tela será atualizada neste momento também...
+15. A altitude de cruzeiro é de 9200m á 12200m.
+16. A velocidade de cruzeiro é acima de 225m/s.
+ 
 
 Observações:
 Os mesmos níveis de voo (300, 320, 340, etc.) são usados ​​para voos no sentido oeste, enquanto que níveis de voo ímpares (310, 330, 350 etc.) são para voos para o leste. Isso significa que há pelo menos 300 metros de folga entre os aviões que voam na mesma via em sentidos diferentes. 

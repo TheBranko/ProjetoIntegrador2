@@ -16,6 +16,11 @@ public class TowerControl {
     public TowerControl() throws IOException, Exception {
         data = new ControllerData();
         Airplane a = data.buildAirplane();
+
+        for(int i = 0; i < 10; i++) {
+            System.out.println(data.buildAirplane().getInclination());
+        }
+        
         double distance = calculateDistance(a.getCurrentLocation(), data.getLandingRoute().getEntryLocation());
         a.move();
         a.calculateScore(distance);

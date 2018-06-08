@@ -22,6 +22,8 @@ public class AirplaneDirector {
         builder.buildCurrentSpeed();
         builder.buildCurrentHight();
         builder.buildCorrentLocation();
+        builder.buildAcceleration();
+        builder.buildInclination();
     }
 
     public Airplane getAirplane() {
