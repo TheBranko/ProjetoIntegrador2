@@ -8,7 +8,7 @@ public class Coordinate {
     private double latitude;
     private double longitude;
 
-    public Coordinate(double latitude, double longitude) {
+    public Coordinate(double longitude, double latitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -31,7 +31,7 @@ public class Coordinate {
 
     @Override
     public String toString() {
-        return latitude + "," + longitude;
+        return longitude + "," + latitude;
     }
     
     

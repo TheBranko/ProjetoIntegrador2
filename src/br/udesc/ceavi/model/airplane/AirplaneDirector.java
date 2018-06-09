@@ -15,7 +15,6 @@ public class AirplaneDirector {
     }
 
     public void build(Route route) throws IOException{
-        builder.readLine();
         builder.buildRoute(route);
         builder.buildTotalFuel();
         builder.buildAverageFuelConsumption();

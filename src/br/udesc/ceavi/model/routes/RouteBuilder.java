@@ -17,7 +17,6 @@ public abstract class RouteBuilder {
         String line;
         if((line = reader.readLine()) != null) {
             lineInfo = line.split(";");
-            System.out.println(lineInfo.length);
             return true;
         } 
         return false;

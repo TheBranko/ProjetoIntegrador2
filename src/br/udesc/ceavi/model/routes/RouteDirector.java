@@ -16,7 +16,6 @@ public class RouteDirector {
     }
     
     public void build() throws IOException {
-        builder.readLine();
         builder.buildEntryLocation();
         builder.buildExitLocation();
         builder.buildEntrySpeed();

@@ -75,7 +75,7 @@ public class ControllerData {
             approachRoutes.add(routeBuilder.getRoute());
             routeBuilder.startsNewRoute();
         }
-
+        
     }
 
     private void buildWaitingRoutes() throws IOException {
@@ -107,12 +107,6 @@ public class ControllerData {
         }
     }
 
-//    private void printAirplanes() {
-//        for (Airplane a : airplanes) {
-//            System.out.println(a.getFuelCapacity() + " " + a.getAverageFuel() + " " + a.getCurrentSpeed() + " " + a.getCurrentLocation() + " " + a.getCurrentHeight() + " " + a.getRoute().getEntryLocation().toString());
-//        }
-//    }
-    
     public Route getLandingRoute() {
         return landingRoutes.get(0);
     } 

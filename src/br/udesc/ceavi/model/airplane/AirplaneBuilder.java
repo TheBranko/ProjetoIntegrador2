@@ -34,7 +34,7 @@ public class AirplaneBuilder {
     }
 
     void buildTotalFuel() {
-        airplane.setTotalFuel(Double.parseDouble(lineInfo[0]));
+        airplane.setTotalFuel(Double.parseDouble(lineInfo[0].replaceAll("\\D+","")));
     }
 
     void buildAverageFuelConsumption() {
@@ -66,7 +66,6 @@ public class AirplaneBuilder {
     }
 
     public void buildInclination() {
-        System.out.println(lineInfo[4]);
         airplane.setInclination(Double.parseDouble(lineInfo[4]));
     }
 
