@@ -24,7 +24,11 @@ public class Utils {
     public double calculateDistance(Coordinate a, Coordinate b) {
         double deltaY = b.getLatitude() - a.getLatitude();
         double deltaX = b.getLongitude() - a.getLongitude();
-        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        return Math.sqrt((Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
+    }
+    
+    public int getUpdateInterval() {
+        return 3;
     }
 
 }

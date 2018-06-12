@@ -1,5 +1,7 @@
 package br.udesc.ceavi.model.airplane;
 
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeOfArrivalVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Route;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -67,6 +69,12 @@ public class AirplaneBuilder {
 
     public void buildInclination() {
         airplane.setInclination(Double.parseDouble(lineInfo[4]));
+    }
+    
+    public void buildTimeToRouteEnd() {
+        VisitorAirplane v = new CalculateTimeOfArrivalVisitor();
+        airplane.accept(v);
+        airplane.setTimeToRouteEnd((double) v.getValue());
     }
 
 }

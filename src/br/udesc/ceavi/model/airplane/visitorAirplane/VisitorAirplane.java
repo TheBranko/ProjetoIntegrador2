@@ -7,7 +7,14 @@ import br.udesc.ceavi.model.airplane.Airplane;
  *
  * @author Avell
  */
-public interface VisitorAirplane {
+public abstract class VisitorAirplane {
     
-    public void visit(Airplane airplane);
+    protected Object value;
+    
+    public void visit(Airplane airplane) {}
+    public void visit(Airplane airplane, double time) throws Exception {}
+    
+    public Object getValue() {
+        return value;
+    }
 }

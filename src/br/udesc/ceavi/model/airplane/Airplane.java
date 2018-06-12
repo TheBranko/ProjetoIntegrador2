@@ -1,5 +1,7 @@
 package br.udesc.ceavi.model.airplane;
 
+import br.udesc.ceavi.controlller.Utils;
+import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.Coordinate;
 
@@ -18,6 +20,7 @@ public class Airplane implements Comparable<Airplane> {
     private double currentHeight;
     private double acceleration;
     private double inclination;
+    private double timeToRouteEnd;
 
     private Coordinate currentLocation;
 
@@ -102,52 +105,7 @@ public class Airplane implements Comparable<Airplane> {
         return this.getScore() > o.getScore() ? -1 : 1;
     }
 
-    public void move() throws Exception {
-        int time = 3;
-        double necessaryFuel = consumeFuel(time);
-        
-        if (necessaryFuel <= totalFuel) {
-            totalFuel = totalFuel - necessaryFuel;
-
-            double metersTravelled = currentSpeed * time;
-            consumeFuel(time);
-
-            double x1 = currentLocation.getLongitude();
-            double y1 = currentLocation.getLatitude();
-
-            double x2 = route.getExitLocation().getLongitude();
-            double y2 = route.getExitLocation().getLatitude();
-
-            double deltaX = x2 - x1;
-            double deltaY = y2 - y1;
-            double rumo = Math.abs(Math.toDegrees(Math.atan(deltaX / deltaY)));
-
-            double azimute = 0;
-            if (deltaX >= 0 && deltaY >= 0) {
-                azimute = rumo;
-            } else if (deltaX >= 0 && deltaY < 0) {
-                azimute = 180 - rumo;
-            } else if (deltaX < 0 && deltaY < 0) {
-                azimute = rumo + 180;
-            } else if (deltaX < 0 && deltaY >= 0) {
-                azimute = 360 - rumo;
-            }
-
-            double projecaoX = metersTravelled * Math.sin(Math.toRadians(azimute));
-            double projecaoY = metersTravelled * Math.cos(Math.toRadians(azimute));
-
-            double newX = currentLocation.getLongitude() + projecaoX;
-            double newY = currentLocation.getLatitude() + projecaoY;
-
-            currentLocation.setLongitude(newX);
-            currentLocation.setLatitude(newY);
-        } else {
-            throw new Exception("Out of fuel");
-        }
-
-    }
-
-    private double consumeFuel(int time) {
+    public double consumeFuel(double time) {
         double consumedFuel = 0;
         if ((currentHeight >= 9200 && currentHeight <= 12200 && currentSpeed >= 225) && inclination == 90) {
             consumedFuel = averageFuelConsumption * time;
@@ -160,4 +118,23 @@ public class Airplane implements Comparable<Airplane> {
         }
         return consumedFuel;
     }
+    
+    public void accept(VisitorAirplane visitor) {
+        visitor.visit(this);
+    }
+    
+    public void accept(VisitorAirplane visitor, double time) throws Exception {
+        visitor.visit(this, time);
+    }
+
+    public double getTimeToRouteEnd() {
+        return timeToRouteEnd;
+    }
+
+    public void setTimeToRouteEnd(double timeToRouteEnd) {
+        this.timeToRouteEnd = timeToRouteEnd;
+    }
+    
+    
+    
 }

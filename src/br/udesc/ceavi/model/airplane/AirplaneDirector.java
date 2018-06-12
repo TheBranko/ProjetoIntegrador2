@@ -23,6 +23,7 @@ public class AirplaneDirector {
         builder.buildCorrentLocation();
         builder.buildAcceleration();
         builder.buildInclination();
+        builder.buildTimeToRouteEnd();
     }
 
     public Airplane getAirplane() {
