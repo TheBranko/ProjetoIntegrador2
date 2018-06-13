@@ -1,13 +1,11 @@
 
 package br.udesc.ceavi.view;
 
-import br.udesc.ceavi.controlller.TowerControl;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Polygon;
-import java.io.IOException;
 
 /**
  *
