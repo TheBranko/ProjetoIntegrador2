@@ -22,6 +22,7 @@ public class Airplane implements Comparable<Airplane> {
     private double timeToRouteEnd;
 
     private Coordinate currentLocation;
+    private int id;
 
     public double getTotalFuel() {
         return totalFuel;
@@ -31,7 +32,7 @@ public class Airplane implements Comparable<Airplane> {
         this.totalFuel = totalFuel;
     }
 
-    public double getAverageFuel() {
+    public double getAverageFuelConsumption() {
         return averageFuelConsumption;
     }
 
@@ -75,9 +76,8 @@ public class Airplane implements Comparable<Airplane> {
         this.inclination = inclination;
     }
 
-    public void calculateScore(double distanceToAirport) {
-        double quantoPodeVoar = totalFuel / averageFuelConsumption;
-        score = quantoPodeVoar - distanceToAirport;
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public double getCurrentHeight() {
@@ -133,7 +133,14 @@ public class Airplane implements Comparable<Airplane> {
     public void setTimeToRouteEnd(double timeToRouteEnd) {
         this.timeToRouteEnd = timeToRouteEnd;
     }
-    
+
+    public void setId(int count) {
+        this.id = count;
+    }
+
+    public int getId() {
+        return id;
+    }
     
     
 }

@@ -1,14 +1,18 @@
 package br.udesc.ceavi.controlller;
 
 import br.udesc.ceavi.model.airplane.Airplane;
-import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateAccelararionVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateAccelerarionVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateNewPosition;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateSpeedVisitor;
-import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeOfArrivalVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeToRouteEndVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Coordinate;
+import br.udesc.ceavi.utils.AirplaneScoreComparator;
+import br.udesc.ceavi.utils.AirplaneTimeComparator;
+import br.udesc.ceavi.utils.Utils;
 import java.io.IOException;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author lucas.adriano, Kevin Kons
@@ -16,52 +20,70 @@ import java.util.PriorityQueue;
 public class TowerControl {
 
     private ControllerData data;
-    private PriorityQueue<Airplane> airplanes = new PriorityQueue<>();
+
+    private List<Airplane> scoreList = new ArrayList<>(10);
+    private List<Airplane> timeList = new ArrayList<>(10);
 
     public TowerControl() throws IOException, Exception {
         data = new ControllerData();
-//        airplanes = new PriorityQueue() {};
-//        airplanes = new PriorityQueue<Airplane>();
 
-        Airplane a = data.buildAirplane();
-        Airplane a2 = data.buildAirplane();
-        airplanes.add(a);
-        airplanes.add(a2);
+        for (int i = 0; i < 10; i++) {
+            Airplane a = data.buildAirplane();
+            scoreList.add(a);
+            timeList.add(a);
+        }
 
-        System.out.println(a.getTimeToRouteEnd() + " Tempo a1");
-        System.out.println(a.getCurrentLocation());
+        while (!scoreList.isEmpty() && !timeList.isEmpty()) {
+            scoreList.sort(new AirplaneScoreComparator());
+            timeList.sort(new AirplaneTimeComparator());
 
-        VisitorAirplane ap = new CalculateAccelararionVisitor();
-        a.accept(ap, a2.getTimeToRouteEnd() + 5);
-        a.setAcceleration((double) ap.getValue());
+            //Garante que as duas Lists estejam ordenadas da igualmente
+            for (int i = 0; i < timeList.size(); i++) {
+                Airplane airplaneByScore = scoreList.get(i);
+                Airplane airplaneByTime = scoreList.get(i);
 
-        double timeToRouteEnd = a.getTimeToRouteEnd();
-        do {
-            VisitorAirplane ap2 = new CalculateTimeOfArrivalVisitor();
-            a.accept(ap2);
-            timeToRouteEnd = (double) ap2.getValue();
-            a.setTimeToRouteEnd(timeToRouteEnd);
+                if (airplaneByScore != airplaneByTime) {
+                    double scoreListTime = airplaneByScore.getTimeToRouteEnd();
 
-            VisitorAirplane ap3 = new CalculateNewPosition();
-            a.accept(ap3, Utils.getInstance().getUpdateInterval());
-            a.setCurrentLocation((Coordinate) ap3.getValue());
+                    VisitorAirplane calculateAcceleration = new CalculateAccelerarionVisitor();
+                    double newTimeToRouteEnd = scoreListTime + 15;
+                    airplaneByTime.accept(calculateAcceleration, newTimeToRouteEnd);
+                    airplaneByTime.setAcceleration((double) calculateAcceleration.getValue());
 
-            VisitorAirplane ap4 = new CalculateSpeedVisitor();
-            a.accept(ap4);
-            a.setCurrentSpeed((double) ap4.getValue());
-
-            System.out.println("-----\n"
-                    + a.getAcceleration() + " Aceleração \n"
-                    + a.getTimeToRouteEnd() + " Tempo até o final da rota\n"
-                    + a.getCurrentLocation() + " Posição atual\n"
-                    + a.getCurrentSpeed() + " Velocidade atual");
-
-        } while (timeToRouteEnd > 1);
-
+                    for (int j = i + 1; i < timeList.size(); j++) {
+                        Airplane airplaneTimeList = timeList.get(j);
+                        if (airplaneTimeList != airplaneByScore) {
+                            newTimeToRouteEnd = newTimeToRouteEnd + 15;
+                            airplaneTimeList.accept(calculateAcceleration, newTimeToRouteEnd);
+                            airplaneTimeList.setAcceleration((double) calculateAcceleration.getValue());
+                        }
+                    }
+                }
+            }
+            
+            for(Airplane a : scoreList) {
+                System.out.println(a.getId());
+            }
+            System.out.println("-------------");
+            for(Airplane a : timeList) {
+                System.out.println(a.getId());
+            }
+            break;
+            
+            //Move atualiza informações dos aviões
+//            for (Airplane a : timeList) {
+//                VisitorAirplane calculateNewPosition = new CalculateNewPosition();
+//                a.accept(calculateNewPosition, Utils.getInstance().getUpdateInterval());
+//                a.setCurrentLocation((Coordinate) calculateNewPosition.getValue());
+//                
+//                VisitorAirplane calculateSpeed = new CalculateSpeedVisitor();
+//                a.accept(calculateSpeed);
+//                a.setCurrentSpeed((double) calculateSpeed.getValue());
+//                
+//                VisitorAirplane calculateTimeToRouteEnd = new CalculateTimeToRouteEndVisitor();
+//                a.accept(calculateTimeToRouteEnd);
+//                a.setTimeToRouteEnd((double) calculateTimeToRouteEnd.getValue());
+//            }
+        }
     }
-    
-    public void run() {
-        
-    }
-
 }

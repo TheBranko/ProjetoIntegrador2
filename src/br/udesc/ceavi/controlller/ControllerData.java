@@ -41,7 +41,7 @@ public class ControllerData {
         Random random = new Random();
         airplaneBuilder = new AirplaneBuilder();
         airplaneDirector = new AirplaneDirector(airplaneBuilder);
-        
+
         if (airplaneBuilder.readLine()) {
             airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() - 1)));
             try {
@@ -53,7 +53,7 @@ public class ControllerData {
             throw new Exception("All airplanes in the 'airplanex.txt' file have already been detected");
         }
     }
-    
+
 //    private void buildAllAirplanes() throws IOException {
 //        Random random = new Random();
 //        airplaneBuilder = new AirplaneBuilder();
@@ -65,7 +65,6 @@ public class ControllerData {
 //            airplaneBuilder.startsNewAirplane();
 //        }
 //    }
-
     private void buildApproachRoutes() throws IOException {
         routeBuilder = new ApproachRouteBuilder();
         routeDirector = new RouteDirector(routeBuilder);
@@ -75,7 +74,7 @@ public class ControllerData {
             approachRoutes.add(routeBuilder.getRoute());
             routeBuilder.startsNewRoute();
         }
-        
+
     }
 
     private void buildWaitingRoutes() throws IOException {
@@ -109,7 +108,6 @@ public class ControllerData {
 
     public Route getLandingRoute() {
         return landingRoutes.get(0);
-    } 
-   
+    }
 
 }

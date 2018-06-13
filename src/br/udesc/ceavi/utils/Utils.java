@@ -1,4 +1,4 @@
-package br.udesc.ceavi.controlller;
+package br.udesc.ceavi.utils;
 
 import br.udesc.ceavi.model.routes.Coordinate;
 

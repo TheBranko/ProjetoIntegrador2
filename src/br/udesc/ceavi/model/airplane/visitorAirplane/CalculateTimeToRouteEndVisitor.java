@@ -1,13 +1,13 @@
 package br.udesc.ceavi.model.airplane.visitorAirplane;
 
-import br.udesc.ceavi.controlller.Utils;
+import br.udesc.ceavi.utils.Utils;
 import br.udesc.ceavi.model.airplane.Airplane;
 
 /**
  *
  * @author Avell
  */
-public class CalculateTimeOfArrivalVisitor extends VisitorAirplane {
+public class CalculateTimeToRouteEndVisitor extends VisitorAirplane {
 
     @Override
     public void visit(Airplane airplane) {

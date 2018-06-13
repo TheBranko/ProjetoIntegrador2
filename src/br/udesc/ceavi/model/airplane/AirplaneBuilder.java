@@ -1,6 +1,7 @@
 package br.udesc.ceavi.model.airplane;
 
-import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeOfArrivalVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateScoreVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeToRouteEndVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Route;
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ public class AirplaneBuilder {
     protected Airplane airplane;
     protected BufferedReader reader;
     protected String[] lineInfo;
+    private int count = 0;
 
     public AirplaneBuilder() throws IOException {
         this.airplane = new Airplane();
@@ -22,10 +24,15 @@ public class AirplaneBuilder {
     }
 
     public boolean readLine() throws IOException {
-        String line;
-        if ((line = reader.readLine()) != null) {
-            lineInfo = line.split(";");
-            return true;
+        try {
+            String line;
+            if ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                lineInfo = line.split(";");
+                return true;
+            }
+        } catch(IOException ex) {
+            ex.printStackTrace();
         }
 
         return false;
@@ -36,7 +43,8 @@ public class AirplaneBuilder {
     }
 
     void buildTotalFuel() {
-        airplane.setTotalFuel(Double.parseDouble(lineInfo[0].replaceAll("\\D+","")));
+        System.out.println(lineInfo[0].replaceAll("\\D+", ""));
+        airplane.setTotalFuel(Double.parseDouble(lineInfo[0].replaceAll("\\D+", "")));
     }
 
     void buildAverageFuelConsumption() {
@@ -70,11 +78,22 @@ public class AirplaneBuilder {
     public void buildInclination() {
         airplane.setInclination(Double.parseDouble(lineInfo[4]));
     }
-    
+
     public void buildTimeToRouteEnd() {
-        VisitorAirplane v = new CalculateTimeOfArrivalVisitor();
+        VisitorAirplane v = new CalculateTimeToRouteEndVisitor();
         airplane.accept(v);
         airplane.setTimeToRouteEnd((double) v.getValue());
+    }
+
+    public void buildScore() {
+        VisitorAirplane v = new CalculateScoreVisitor();
+        airplane.accept(v);
+        airplane.setScore((double) v.getValue());
+    }
+
+    public void buildId() {
+        System.out.println(lineInfo[5]);
+        airplane.setId(Integer.parseInt(lineInfo[5]));
     }
 
 }
