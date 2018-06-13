@@ -9,11 +9,9 @@ import java.io.IOException;
 public class AirplaneDirector {
 
     private AirplaneBuilder builder;
-    private int count;
     
     public AirplaneDirector(AirplaneBuilder builder) {
         this.builder = builder;
-        count = 0;
     }
 
     public void build(Route route) throws IOException{

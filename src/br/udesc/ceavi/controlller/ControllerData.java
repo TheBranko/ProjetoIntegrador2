@@ -31,16 +31,16 @@ public class ControllerData {
     private RouteBuilder routeBuilder;
 
     public ControllerData() throws IOException {
+        airplaneBuilder = new AirplaneBuilder();
+        airplaneDirector = new AirplaneDirector(airplaneBuilder);
+        
         buildApproachRoutes();
-//        buildWaitingRoutes();
         buildLandingRoutes();
-
     }
 
     public Airplane buildAirplane() throws IOException, Exception {
         Random random = new Random();
-        airplaneBuilder = new AirplaneBuilder();
-        airplaneDirector = new AirplaneDirector(airplaneBuilder);
+        
 
         if (airplaneBuilder.readLine()) {
             airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() - 1)));

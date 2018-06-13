@@ -27,7 +27,7 @@ public class TowerControl {
     public TowerControl() throws IOException, Exception {
         data = new ControllerData();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             Airplane a = data.buildAirplane();
             scoreList.add(a);
             timeList.add(a);
@@ -36,7 +36,7 @@ public class TowerControl {
         while (!scoreList.isEmpty() && !timeList.isEmpty()) {
             scoreList.sort(new AirplaneScoreComparator());
             timeList.sort(new AirplaneTimeComparator());
-
+            
             //Garante que as duas Lists estejam ordenadas da igualmente
             for (int i = 0; i < timeList.size(); i++) {
                 Airplane airplaneByScore = scoreList.get(i);

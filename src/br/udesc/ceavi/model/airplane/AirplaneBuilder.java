@@ -24,15 +24,10 @@ public class AirplaneBuilder {
     }
 
     public boolean readLine() throws IOException {
-        try {
-            String line;
-            if ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                lineInfo = line.split(";");
-                return true;
-            }
-        } catch(IOException ex) {
-            ex.printStackTrace();
+        String line;
+        if ((line = reader.readLine()) != null) {
+            lineInfo = line.split(";");
+            return true;
         }
 
         return false;
@@ -43,7 +38,6 @@ public class AirplaneBuilder {
     }
 
     void buildTotalFuel() {
-        System.out.println(lineInfo[0].replaceAll("\\D+", ""));
         airplane.setTotalFuel(Double.parseDouble(lineInfo[0].replaceAll("\\D+", "")));
     }
 
@@ -92,7 +86,6 @@ public class AirplaneBuilder {
     }
 
     public void buildId() {
-        System.out.println(lineInfo[5]);
         airplane.setId(Integer.parseInt(lineInfo[5]));
     }
 
