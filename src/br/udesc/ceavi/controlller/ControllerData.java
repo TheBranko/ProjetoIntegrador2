@@ -43,7 +43,7 @@ public class ControllerData {
         airplaneDirector = new AirplaneDirector(airplaneBuilder);
         
         if (airplaneBuilder.readLine()) {
-            airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() /*- 1*/)));
+            airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() - 1)));
             try {
                 return airplaneBuilder.getAirplane();
             } finally {

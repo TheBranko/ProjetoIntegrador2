@@ -7,9 +7,7 @@ import java.io.IOException;
  * @author lucas.adriano, felipe lana
  */
 public class Main {
- 
     public static void main(String[] args) throws IOException, Exception {
-        
         TowerControl tc = new TowerControl();
     }
 }

@@ -12,8 +12,6 @@ public class CalculateTimeOfArrivalVisitor extends VisitorAirplane {
     @Override
     public void visit(Airplane airplane) {
         double distanceToRouteEnd = Utils.getInstance().calculateDistance(airplane.getCurrentLocation(), airplane.getRoute().getExitLocation());
-
-        
         if (airplane.getAcceleration() == 0) {
             value = distanceToRouteEnd / airplane.getCurrentSpeed();
         } else {

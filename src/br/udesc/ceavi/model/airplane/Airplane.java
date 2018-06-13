@@ -1,6 +1,5 @@
 package br.udesc.ceavi.model.airplane;
 
-import br.udesc.ceavi.controlller.Utils;
 import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.Coordinate;
