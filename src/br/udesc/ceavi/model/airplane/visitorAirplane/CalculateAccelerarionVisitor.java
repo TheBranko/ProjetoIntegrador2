@@ -20,7 +20,7 @@ public class CalculateAccelerarionVisitor extends VisitorAirplane {
                     / Math.pow(time, 2);
             value = acceleration;
         } else {
-            value = 0;
+            value = 0.0;
         }
     }
 

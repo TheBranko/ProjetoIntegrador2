@@ -17,6 +17,7 @@ public class CalculateNewPosition extends VisitorAirplane {
             airplane.setTotalFuel(airplane.getTotalFuel() - necessaryFuel);
 
             double metersTravelled = airplane.getCurrentSpeed() + (airplane.getAcceleration() * Math.pow(time, 2)) / 2;
+            System.out.println(metersTravelled + "m travelled at " + airplane.getCurrentSpeed() + "m/s ");
             
             double x1 = airplane.getCurrentLocation().getLongitude();
             double y1 = airplane.getCurrentLocation().getLatitude();
