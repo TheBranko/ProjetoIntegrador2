@@ -11,10 +11,8 @@ import java.io.IOException;
  */
 public class LandingRouteBuilder extends RouteBuilder {
     
-    protected LandingRoute route;
-    
     public LandingRouteBuilder() throws FileNotFoundException, IOException {
-        route = new LandingRoute();
+        startNewRoute();
         reader = new BufferedReader(new FileReader("LandingRoutes.txt"));
     }
 
@@ -45,12 +43,10 @@ public class LandingRouteBuilder extends RouteBuilder {
     @Override
     void buildLength() {
         super.buildLength(); //Build the length of the route
-        route.setGroundLength(Double.parseDouble(lineInfo[5])); //build the length of the route on the ground
     }
     
     @Override
     public void startNewRoute() {
         route = new LandingRoute();
     }
-
 }

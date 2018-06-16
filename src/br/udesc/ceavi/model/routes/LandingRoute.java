@@ -16,18 +16,18 @@ public class LandingRoute extends Route {
      * Length of the route on the ground
      */
     private double groundLength;
-    private Airplane landingAirplane;
+    private Airplane lastAirplaneInto;
 
     public LandingRoute() {
         super();
     }
 
-    public Airplane getLandingAirplane() {
-        return landingAirplane;
+    public Airplane getLastAirplaneInto() {
+        return lastAirplaneInto;
     }
 
-    public void setLandingAirplane(Airplane landingAirplane) {
-        this.landingAirplane = landingAirplane;
+    public void setLastAirplaneInto(Airplane lastAirplaneInto) {
+        this.lastAirplaneInto = lastAirplaneInto;
     }
 
     public double getGroundLength() {

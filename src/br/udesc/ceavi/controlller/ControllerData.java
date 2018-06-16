@@ -4,6 +4,7 @@ import br.udesc.ceavi.model.airplane.Airplane;
 import br.udesc.ceavi.model.airplane.AirplaneBuilder;
 import br.udesc.ceavi.model.airplane.AirplaneDirector;
 import br.udesc.ceavi.model.routes.ApproachRouteBuilder;
+import br.udesc.ceavi.model.routes.LandingRoute;
 import br.udesc.ceavi.model.routes.LandingRouteBuilder;
 import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.RouteBuilder;
@@ -22,7 +23,7 @@ public class ControllerData {
 
     private List<Route> approachRoutes = new ArrayList<>();
     private List<Route> waitingRoutes = new ArrayList<>();
-    private List<Route> landingRoutes = new ArrayList<>();
+    private List<LandingRoute> landingRoutes = new ArrayList<>();
 
     private AirplaneDirector airplaneDirector;
     private AirplaneBuilder airplaneBuilder;
@@ -82,19 +83,13 @@ public class ControllerData {
 
         while (routeBuilder.readLine()) {
             routeDirector.build();
-            landingRoutes.add(routeBuilder.getRoute());
+            landingRoutes.add((LandingRoute) routeBuilder.getRoute());
             routeBuilder.startNewRoute();
         }
 
     }
 
-    private void printRoutes() {
-        for (Route r : approachRoutes) {
-            System.out.println(r.getEntryLocation() + " " + r.getExitLocation() + " " + r.getEntrySpeed() + " " + r.getExitSpeed());
-        }
-    }
-
-    public Route getLandingRoute() {
+    public LandingRoute getLandingRoute() {
         return landingRoutes.get(0);
     }
 

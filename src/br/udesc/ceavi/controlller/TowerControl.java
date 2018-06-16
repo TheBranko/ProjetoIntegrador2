@@ -7,6 +7,7 @@ import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateSpeedVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeToRouteEndVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.VisitorAirplane;
 import br.udesc.ceavi.model.routes.Coordinate;
+import br.udesc.ceavi.model.routes.LandingRoute;
 import br.udesc.ceavi.utils.AirplaneScoreComparator;
 import br.udesc.ceavi.utils.AirplaneTimeComparator;
 import br.udesc.ceavi.utils.Utils;
@@ -96,11 +97,21 @@ public class TowerControl {
      * @param plane Current airplane
      */
     private void checkAirplaneCanGetToLandingRoute(Airplane plane) {
-        boolean lowEnough = plane.getCurrentHeight() <= data.getLandingRoute().getEntryLocation().getLatitude();
-//        boolean noPlaneLanding = data.getLandingRoute();
+        LandingRoute route = data.getLandingRoute();
+        boolean lowEnough = plane.getCurrentHeight() <= route.getEntryLocation().getLatitude();
+        boolean airplaneLanding = route.getLastAirplaneInto() != null;
         
-        if (lowEnough) {
+        //theres enough for other plane to get into the landing route if the time the second airplane it's bigger
+        //than the time to the first one touch the ground and park
+        boolean enoughBetweenTime = airplaneLanding &&
+                                    (route.getLastAirplaneInto().getTimeToRouteEnd() - plane.getTimeToRouteEnd())
+                                    > LandingRoute.TOTAL_TIME_PARKING;
+        
+        //the new airplane can get into the landing route if there's no other airplane
+        //or if the time to land of the current plane it's bigger then the time of the new plane to land
+        if (lowEnough && (!airplaneLanding || enoughBetweenTime)) {
             plane.setRoute(data.getLandingRoute());
+            route.setLastAirplaneInto(plane);
         }
     }
 }
