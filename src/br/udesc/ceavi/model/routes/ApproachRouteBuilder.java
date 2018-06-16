@@ -40,7 +40,7 @@ public class ApproachRouteBuilder extends RouteBuilder {
     }
 
     @Override
-    public void startsNewRoute() {
+    public void startNewRoute() {
         route = new ApproachRoute();
     }
 

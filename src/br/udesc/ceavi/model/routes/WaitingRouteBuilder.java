@@ -40,7 +40,7 @@ public class WaitingRouteBuilder extends RouteBuilder{
     }
 
     @Override
-    public void startsNewRoute() {
+    public void startNewRoute() {
         route = new WaitingRoute();
     }
 

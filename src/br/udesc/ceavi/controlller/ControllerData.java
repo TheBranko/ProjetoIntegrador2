@@ -72,19 +72,7 @@ public class ControllerData {
         while (routeBuilder.readLine()) {
             routeDirector.build();
             approachRoutes.add(routeBuilder.getRoute());
-            routeBuilder.startsNewRoute();
-        }
-
-    }
-
-    private void buildWaitingRoutes() throws IOException {
-        routeBuilder = new WaitingRouteBuilder();
-        routeDirector = new RouteDirector(routeBuilder);
-
-        while (routeBuilder.readLine()) {
-            routeDirector.build();
-            waitingRoutes.add(routeBuilder.getRoute());
-            routeBuilder.startsNewRoute();
+            routeBuilder.startNewRoute();
         }
     }
 
@@ -95,7 +83,7 @@ public class ControllerData {
         while (routeBuilder.readLine()) {
             routeDirector.build();
             landingRoutes.add(routeBuilder.getRoute());
-            routeBuilder.startsNewRoute();
+            routeBuilder.startNewRoute();
         }
 
     }

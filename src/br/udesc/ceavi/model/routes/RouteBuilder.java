@@ -30,7 +30,7 @@ public abstract class RouteBuilder {
 
     protected abstract void buildExitSpeed();
     
-    public abstract void startsNewRoute();
+    public abstract void startNewRoute();
 
     void buildLength() {
         double deltaX = route.getExitLocation().getLongitude() - route.getEntryLocation().getLongitude();

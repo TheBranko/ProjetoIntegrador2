@@ -1,7 +1,7 @@
 package br.udesc.ceavi.controlller;
 
 import br.udesc.ceavi.model.airplane.Airplane;
-import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateAccelerarionVisitor;
+import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateAccelerationVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateNewPosition;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateSpeedVisitor;
 import br.udesc.ceavi.model.airplane.visitorAirplane.CalculateTimeToRouteEndVisitor;
@@ -45,12 +45,12 @@ public class TowerControl {
                 if (airplaneByScore != airplaneByTime) {
                     double scoreListTime = airplaneByScore.getTimeToRouteEnd();
 
-                    VisitorAirplane calculateAcceleration = new CalculateAccelerarionVisitor();
+                    VisitorAirplane calculateAcceleration = new CalculateAccelerationVisitor();
                     double newTimeToRouteEnd = scoreListTime + 15;
                     airplaneByTime.accept(calculateAcceleration, newTimeToRouteEnd);
                     airplaneByTime.setAcceleration((double) calculateAcceleration.getValue());
 
-                    for (int j = i + 1; i < timeList.size(); j++) {
+                    for (int j = i + 1; j < timeList.size(); j++) {
                         Airplane airplaneTimeList = timeList.get(j);
                         if (airplaneTimeList != airplaneByScore) {
                             newTimeToRouteEnd = newTimeToRouteEnd + 15;
@@ -72,6 +72,9 @@ public class TowerControl {
             
             //Move atualiza informações dos aviões
             for (Airplane a : timeList) {
+                //If the plane it's ready to go to the landing route
+                checkAirplaneCanGetToLandingRoute(a);
+                
                 VisitorAirplane calculateNewPosition = new CalculateNewPosition();
                 a.accept(calculateNewPosition, Utils.getInstance().getUpdateInterval());
                 a.setCurrentLocation((Coordinate) calculateNewPosition.getValue());
@@ -84,6 +87,20 @@ public class TowerControl {
                 a.accept(calculateTimeToRouteEnd);
                 a.setTimeToRouteEnd((double) calculateTimeToRouteEnd.getValue());
             }
+        }
+        
+    }
+    
+    /**
+     * Checks if the plane it's low enough to get to the landing route
+     * @param plane Current airplane
+     */
+    private void checkAirplaneCanGetToLandingRoute(Airplane plane) {
+        boolean lowEnough = plane.getCurrentHeight() <= data.getLandingRoute().getEntryLocation().getLatitude();
+//        boolean noPlaneLanding = data.getLandingRoute();
+        
+        if (lowEnough) {
+            plane.setRoute(data.getLandingRoute());
         }
     }
 }

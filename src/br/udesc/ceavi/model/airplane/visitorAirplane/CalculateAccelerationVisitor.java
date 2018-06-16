@@ -7,7 +7,7 @@ import br.udesc.ceavi.model.airplane.Airplane;
  *
  * @author Avell
  */
-public class CalculateAccelerarionVisitor extends VisitorAirplane {
+public class CalculateAccelerationVisitor extends VisitorAirplane {
 
     @Override
     public void visit(Airplane airplane, double time) {
