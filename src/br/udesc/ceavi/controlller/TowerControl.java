@@ -13,7 +13,9 @@ import br.udesc.ceavi.utils.AirplaneTimeComparator;
 import br.udesc.ceavi.utils.Utils;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lucas.adriano, Kevin Kons
@@ -24,6 +26,7 @@ public class TowerControl {
 
     private List<Airplane> scoreList = new ArrayList<>(10);
     private List<Airplane> timeList = new ArrayList<>(10);
+    private Map<Integer, Double> timeOnLandingRoute = new HashMap<>(10);
 
     public TowerControl() throws IOException, Exception {
         data = new ControllerData();
@@ -87,6 +90,23 @@ public class TowerControl {
                 VisitorAirplane calculateTimeToRouteEnd = new CalculateTimeToRouteEndVisitor();
                 a.accept(calculateTimeToRouteEnd);
                 a.setTimeToRouteEnd((double) calculateTimeToRouteEnd.getValue());
+                
+                boolean planeMadeIt = a.getTimeToRouteEnd() == 0 || a.isOnTheGround();
+                
+                //if the plane it's on the ground, start counting the time to park
+                if (a.getRoute() instanceof LandingRoute && planeMadeIt) {
+                    double currentTime = timeOnLandingRoute.getOrDefault(a.getId(), (double) 0);
+                    double newTime = currentTime + Utils.getInstance().getUpdateInterval();
+                    
+                    //If the plane still haven't had time to park
+                    if (newTime < LandingRoute.TOTAL_TIME_PARKING) {
+                        timeOnLandingRoute.put(a.getId(), newTime);
+                    }
+                    else {//otherwise, it made it! :D
+                        timeList.remove(a);
+                        scoreList.remove(a);
+                    }
+                }
             }
         }
         

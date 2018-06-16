@@ -20,5 +20,4 @@ public class CalculateTimeToRouteEndVisitor extends VisitorAirplane {
             value = (-airplane.getCurrentSpeed() + Math.sqrt(delta)) / airplane.getAcceleration();
         }
     }
-
 }
