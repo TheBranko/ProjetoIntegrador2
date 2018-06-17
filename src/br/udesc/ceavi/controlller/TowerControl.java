@@ -26,6 +26,7 @@ public class TowerControl {
 
     private List<Airplane> scoreList = new ArrayList<>(10);
     private List<Airplane> timeList = new ArrayList<>(10);
+    private List<Airplane> removeList = new ArrayList<>(10);
     private Map<Integer, Double> timeOnLandingRoute = new HashMap<>(10);
 
     public TowerControl() throws IOException, Exception {
@@ -101,13 +102,17 @@ public class TowerControl {
                     //If the plane still haven't had time to park
                     if (newTime < LandingRoute.TOTAL_TIME_PARKING) {
                         timeOnLandingRoute.put(a.getId(), newTime);
+                        System.out.println(String.format("avião %s está há %s segundos na rota de pouso", a.getId(), String.valueOf(newTime)));
                     }
                     else {//otherwise, it made it! :D
-                        timeList.remove(a);
-                        scoreList.remove(a);
+                        System.out.println(String.format("Avião %s pousou", a.getId()));
+                        removeList.add(a);
                     }
                 }
             }
+            
+            timeList.removeAll(removeList);
+            removeList.clear();
         }
         
     }
@@ -132,6 +137,7 @@ public class TowerControl {
         //the new airplane can get into the landing route if there's no other airplane
         //or if the time to land of the current plane it's bigger then the time of the new plane to land
         if (lowEnough && (!airplaneLanding || enoughBetweenTime)) {
+            System.out.println(String.format("avião %s entrou da rota de pouso", plane.getId()));
             plane.setRoute(data.getLandingRoute());
             route.setLastAirplaneInto(plane);
         }
