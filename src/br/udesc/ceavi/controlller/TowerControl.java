@@ -118,7 +118,9 @@ public class TowerControl {
      */
     private void checkAirplaneCanGetToLandingRoute(Airplane plane) {
         LandingRoute route = data.getLandingRoute();
-        boolean lowEnough = plane.getCurrentHeight() <= route.getEntryLocation().getLatitude();
+        boolean lowEnough = plane.getCurrentLocation().getLatitude() <= route.getEntryLocation().getLatitude() || 
+                            plane.getCurrentLocation().getLongitude() <= route.getEntryLocation().getLongitude();
+        
         boolean airplaneLanding = route.getLastAirplaneInto() != null;
         
         //theres enough for other plane to get into the landing route if the time the second airplane it's bigger

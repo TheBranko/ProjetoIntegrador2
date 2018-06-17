@@ -37,12 +37,4 @@ public class LandingRoute extends Route {
     public void setGroundLength(double groundLength) {
         this.groundLength = groundLength;
     }
-    
-    /**
-     * Time to land = Time to reach the ground + time to stop the plane and unload the passengers
-     * @return 
-     */
-    public double getTimeToLand() {
-        return 104 + TOTAL_TIME_PARKING;
-    };
 }

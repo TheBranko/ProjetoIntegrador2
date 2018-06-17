@@ -14,6 +14,6 @@ public class AirplaneScoreComparator implements Comparator<Airplane> {
         if (o1.getScore() == o2.getScore()) {
             return 0;
         }
-        return o1.getScore() > o2.getScore() ? -1 : 1;
+        return o1.getScore() > o2.getScore() ? 1 : -1;
     }
 }

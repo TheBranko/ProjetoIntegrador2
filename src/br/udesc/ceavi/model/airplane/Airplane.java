@@ -147,7 +147,6 @@ public class Airplane implements Comparable<Airplane> {
      * @return Whether the plane it's on the ground or not
      */
     public boolean isOnTheGround() {
-        return getCurrentLocation().getLatitude() == 0 &&
-               getCurrentLocation().getLongitude() == 0;
+        return getCurrentLocation().getLatitude() <= 0;
     }
 }
