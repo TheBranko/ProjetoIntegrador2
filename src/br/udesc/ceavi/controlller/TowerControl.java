@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author lucas.adriano, Kevin Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class TowerControl {
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class RouteDirector {
     

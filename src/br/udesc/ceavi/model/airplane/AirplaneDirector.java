@@ -4,7 +4,7 @@ import br.udesc.ceavi.model.routes.Route;
 import java.io.IOException;
 
 /**
- * @author lucas.adriano, felipe lana
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class AirplaneDirector {
 

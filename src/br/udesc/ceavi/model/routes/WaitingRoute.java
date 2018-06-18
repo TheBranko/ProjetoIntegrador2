@@ -2,7 +2,7 @@ package br.udesc.ceavi.model.routes;
 
 /**
  *
- * @author Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class WaitingRoute extends Route {
     

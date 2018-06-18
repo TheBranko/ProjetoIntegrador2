@@ -1,7 +1,7 @@
 package br.udesc.ceavi.model.routes;
 
 /**
- * @author lucas.adriano, felipe lana
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class Coordinate {
  

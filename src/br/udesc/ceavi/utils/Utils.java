@@ -4,7 +4,7 @@ import br.udesc.ceavi.model.routes.Coordinate;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class Utils {
 

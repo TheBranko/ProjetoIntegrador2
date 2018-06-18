@@ -5,7 +5,7 @@ import br.udesc.ceavi.model.airplane.Airplane;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public abstract class VisitorAirplane {
     

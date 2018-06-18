@@ -1,7 +1,7 @@
 package br.udesc.ceavi.model.routes;
 
 /**
- * @author lucas.adriano, felipe lana, Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 abstract public class Route {
  
