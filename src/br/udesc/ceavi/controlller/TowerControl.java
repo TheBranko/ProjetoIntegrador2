@@ -46,7 +46,7 @@ public class TowerControl {
 
         while (!scoreList.isEmpty() && !timeList.isEmpty()) {
             //Garante que as duas Lists estejam ordenadas da igualmente
-            ArrangeOrdemOfArrival();
+            arrangeOrdemOfArrival();
 
             //Move atualiza informações dos aviões
             for (Airplane a : timeList) {
@@ -74,9 +74,9 @@ public class TowerControl {
                     //If the plane still haven't had time to park
                     if (newTime < LandingRoute.TOTAL_TIME_PARKING) {
                         timeOnLandingRoute.put(a.getId(), newTime);
-                        System.out.println(String.format("avião %s está há %s segundos na rota de pouso", a.getId(), String.valueOf(newTime)));
+                        System.out.println(String.format("Avião %s está há %s segundos na rota de pouso.", a.getId(), String.valueOf(newTime)));
                     } else {//otherwise, it made it! :D
-                        System.out.println(String.format("Avião %s pousou", a.getId()));
+                        System.out.println(String.format("Avião %s pousou.", a.getId()));
                         removeList.add(a);
                     }
                 }
@@ -84,10 +84,8 @@ public class TowerControl {
 
             timeList.removeAll(removeList);
             removeList.clear();
-            System.out.println("-----");
         }
         System.out.println("todos aviões pousaram");
-
     }
 
     /**
@@ -112,14 +110,14 @@ public class TowerControl {
         //or if the time to land of the current plane it's bigger then the time of the new plane to land
         if (lowEnough && (!airplaneLanding || enoughBetweenTime)) {
             System.out.println(plane.getCurrentLocation().getLongitude() + " " + plane.getCurrentLocation().getLatitude());
-            System.out.println(String.format("avião %s entrou da rota de pouso", plane.getId()));
+            System.out.println(String.format("Avião %s entrou da rota de pouso", plane.getId()));
             plane.setRoute(data.getLandingRoute());
             route.setLastAirplaneInto(plane);
         }
     }
 
     //Ensures that the two lists are equally ordered
-    private void ArrangeOrdemOfArrival() throws Exception {
+    private void arrangeOrdemOfArrival() throws Exception {
         for (int i = 0; i < timeList.size(); i++) {
             Airplane airplaneByScore = scoreList.get(i);
             Airplane airplaneByTime = timeList.get(i);
