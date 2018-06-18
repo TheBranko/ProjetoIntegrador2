@@ -21,7 +21,7 @@ public class LandingRouteBuilder extends RouteBuilder {
         double longitude = Double.parseDouble(lineInfo[0]);
         double latitude = Double.parseDouble(lineInfo[1]);
         route.setEntryLocation(new Coordinate(longitude, latitude));
-    }
+    }   
 
     @Override
     protected void buildExitLocation() {

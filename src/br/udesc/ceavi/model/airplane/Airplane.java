@@ -12,14 +12,14 @@ public class Airplane implements Comparable<Airplane> {
     private Route route;
 
     private double score;
-
+    private double timeToRouteEnd;
+    
     private double totalFuel;
     private double averageFuelConsumption;
     private double currentSpeed;
     private double currentHeight;
     private double acceleration;
     private double inclination;
-    private double timeToRouteEnd;
 
     private Coordinate currentLocation;
     private int id;

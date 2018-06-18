@@ -13,7 +13,7 @@ public class AirplaneTimeComparator implements Comparator<Airplane>{
     public int compare(Airplane o1, Airplane o2) {
         if(o1.getTimeToRouteEnd() == o2.getTimeToRouteEnd())
             return 0;
-        return o1.getTimeToRouteEnd() > o2.getTimeToRouteEnd() ? -1 : 1;
+        return o1.getTimeToRouteEnd() > o2.getTimeToRouteEnd() ? 1 : -1;
     }
     
 }

@@ -15,7 +15,7 @@ public class CalculateAccelerationVisitor extends VisitorAirplane {
         if (speed > 66) {
             double distanceToRouteEnd = Utils.getInstance().calculateDistance(
                     airplane.getCurrentLocation(), airplane.getRoute().getExitLocation());
-
+            
             double acceleration = ((distanceToRouteEnd - (speed * time)) * 2)
                     / Math.pow(time, 2);
             value = acceleration;
