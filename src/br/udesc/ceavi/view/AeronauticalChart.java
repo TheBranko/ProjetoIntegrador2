@@ -9,7 +9,7 @@ import java.awt.Polygon;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class AeronauticalChart extends Applet {
 

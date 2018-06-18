@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class WaitingRouteBuilder extends RouteBuilder{
     

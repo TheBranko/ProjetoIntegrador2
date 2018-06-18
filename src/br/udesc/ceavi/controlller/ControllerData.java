@@ -17,7 +17,7 @@ import java.util.Random;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class ControllerData {
 

@@ -5,7 +5,7 @@ import br.udesc.ceavi.utils.Utils;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class CalculateScoreVisitor extends VisitorAirplane {
     

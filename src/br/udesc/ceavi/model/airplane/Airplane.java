@@ -5,7 +5,7 @@ import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.Coordinate;
 
 /**
- * @author lucas.adriano, felipe lana, Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class Airplane implements Comparable<Airplane> {
 

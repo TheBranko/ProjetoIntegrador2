@@ -3,7 +3,7 @@ package br.udesc.ceavi.model.routes;
 import br.udesc.ceavi.model.airplane.Airplane;
 
 /**
- * @author lucas.adriano, felipe lana, Kons
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class LandingRoute extends Route {
     

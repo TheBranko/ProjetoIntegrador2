@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Avell
+ * @author Felipe Lana, Kevin Kons, Lucas Adriano, Jéssica
  */
 public class AirplaneTimeComparator implements Comparator<Airplane>{
 
