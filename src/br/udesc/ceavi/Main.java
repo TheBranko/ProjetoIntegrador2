@@ -7,7 +7,14 @@ import java.io.IOException;
  * @author lucas.adriano, felipe lana
  */
 public class Main {
-    public static void main(String[] args) throws IOException, Exception {
-        new TowerControl();
+
+    public static void main(String[] args) {
+        try {
+            new TowerControl();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

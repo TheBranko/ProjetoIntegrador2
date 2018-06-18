@@ -16,7 +16,7 @@ public class CalculateTimeToRouteEndVisitor extends VisitorAirplane {
         if (airplane.getAcceleration() == 0) {
             value = distanceToRouteEnd / airplane.getCurrentSpeed();
         } else {
-            double delta = Math.pow(airplane.getCurrentSpeed(), 2) + (2 * airplane.getAcceleration() * distanceToRouteEnd);
+            double delta = Math.pow(airplane.getCurrentSpeed(), 2.0) + (2.0 * airplane.getAcceleration() * distanceToRouteEnd);
             value = (-airplane.getCurrentSpeed() + Math.sqrt(delta)) / airplane.getAcceleration();
         }
     }

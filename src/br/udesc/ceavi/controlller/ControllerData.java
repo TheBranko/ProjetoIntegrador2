@@ -9,7 +9,6 @@ import br.udesc.ceavi.model.routes.LandingRouteBuilder;
 import br.udesc.ceavi.model.routes.Route;
 import br.udesc.ceavi.model.routes.RouteBuilder;
 import br.udesc.ceavi.model.routes.RouteDirector;
-import br.udesc.ceavi.model.routes.WaitingRouteBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

@@ -28,6 +28,8 @@ public class TowerControl {
     private List<Airplane> timeList = new ArrayList<>(10);
     private List<Airplane> removeList = new ArrayList<>(10);
     private Map<Integer, Double> timeOnLandingRoute = new HashMap<>(10);
+    private VisitorAirplane calculateAcceleration = new CalculateAccelerationVisitor();
+    private VisitorAirplane calculateTimeToRouteEnd = new CalculateTimeToRouteEndVisitor();
 
     public TowerControl() throws IOException, Exception {
         data = new ControllerData();
@@ -37,43 +39,14 @@ public class TowerControl {
             scoreList.add(a);
             timeList.add(a);
         }
+        scoreList.sort(new AirplaneScoreComparator());
+        timeList.sort(new AirplaneTimeComparator());
 
         System.out.println("Nº de aviões: " + scoreList.size());
-        VisitorAirplane calculateAcceleration = new CalculateAccelerationVisitor();
-        VisitorAirplane calculateTimeToRouteEnd = new CalculateTimeToRouteEndVisitor();
 
         while (!scoreList.isEmpty() && !timeList.isEmpty()) {
             //Garante que as duas Lists estejam ordenadas da igualmente
-            for (int i = 0; i < timeList.size(); i++) {
-                scoreList.sort(new AirplaneScoreComparator());
-                timeList.sort(new AirplaneTimeComparator());
-                
-                Airplane airplaneByScore = scoreList.get(i);
-                Airplane airplaneByTime = timeList.get(i);
-
-                if (airplaneByScore != airplaneByTime) {
-                    double scoreListTime = airplaneByScore.getTimeToRouteEnd();
-
-                    double newTimeToRouteEnd = scoreListTime + 15;
-                    airplaneByTime.accept(calculateAcceleration, newTimeToRouteEnd);
-                    airplaneByTime.setAcceleration((double) calculateAcceleration.getValue());
-
-                    airplaneByTime.accept(calculateTimeToRouteEnd);
-                    airplaneByTime.setTimeToRouteEnd((double) calculateTimeToRouteEnd.getValue());
-
-                    for (int j = i + 1; j < timeList.size(); j++) {
-                        Airplane airplaneTimeList = timeList.get(j);
-                        if (airplaneTimeList != airplaneByScore) {
-                            newTimeToRouteEnd = newTimeToRouteEnd + 15;
-                            airplaneTimeList.accept(calculateAcceleration, newTimeToRouteEnd);
-                            airplaneTimeList.setAcceleration((double) calculateAcceleration.getValue());
-
-                            airplaneTimeList.accept(calculateTimeToRouteEnd);
-                            airplaneTimeList.setTimeToRouteEnd((double) calculateTimeToRouteEnd.getValue());
-                        }
-                    }
-                }
-            }
+            ArrangeOrdemOfArrival();
 
             //Move atualiza informações dos aviões
             for (Airplane a : timeList) {
@@ -142,6 +115,37 @@ public class TowerControl {
             System.out.println(String.format("avião %s entrou da rota de pouso", plane.getId()));
             plane.setRoute(data.getLandingRoute());
             route.setLastAirplaneInto(plane);
+        }
+    }
+
+    //Ensures that the two lists are equally ordered
+    private void ArrangeOrdemOfArrival() throws Exception {
+        for (int i = 0; i < timeList.size(); i++) {
+            Airplane airplaneByScore = scoreList.get(i);
+            Airplane airplaneByTime = timeList.get(i);
+
+            if (airplaneByScore != airplaneByTime) {
+                double scoreListTime = airplaneByScore.getTimeToRouteEnd();
+
+                double newTimeToRouteEnd = scoreListTime + 15;
+                airplaneByTime.accept(calculateAcceleration, newTimeToRouteEnd);
+                airplaneByTime.setAcceleration((double) calculateAcceleration.getValue());
+
+                airplaneByTime.setTimeToRouteEnd(newTimeToRouteEnd);
+
+                for (int j = i + 1; j < timeList.size(); j++) {
+                    airplaneByTime = timeList.get(j);
+                    if (airplaneByTime != airplaneByScore) {
+                        newTimeToRouteEnd = newTimeToRouteEnd + 15;
+                        airplaneByTime.accept(calculateAcceleration, newTimeToRouteEnd);
+                        airplaneByTime.setAcceleration((double) calculateAcceleration.getValue());
+
+                        airplaneByTime.setTimeToRouteEnd(newTimeToRouteEnd);
+                    }
+                }
+            }
+            scoreList.sort(new AirplaneScoreComparator());
+            timeList.sort(new AirplaneTimeComparator());
         }
     }
 }
