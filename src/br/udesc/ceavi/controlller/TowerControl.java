@@ -84,8 +84,9 @@ public class TowerControl {
 
             timeList.removeAll(removeList);
             removeList.clear();
+//            Thread.sleep(1000);
         }
-        System.out.println("todos aviões pousaram");
+        System.out.println("Todos aviões pousaram");
     }
 
     /**
@@ -95,8 +96,10 @@ public class TowerControl {
      */
     private void checkAirplaneCanGetToLandingRoute(Airplane plane) {
         LandingRoute route = data.getLandingRoute();
-        boolean lowEnough = plane.getCurrentLocation().getLatitude() <= route.getEntryLocation().getLatitude()
-                || plane.getCurrentLocation().getLongitude() <= route.getEntryLocation().getLongitude();
+        
+        boolean lowEnough = 
+            Math.abs(Math.abs(plane.getCurrentLocation().getLatitude()) - Math.abs(route.getEntryLocation().getLatitude())) <= 300
+         || Math.abs(Math.abs(plane.getCurrentLocation().getLongitude()) - Math.abs(route.getEntryLocation().getLongitude())) <= 300;
 
         boolean airplaneLanding = route.getLastAirplaneInto() != null;
 
