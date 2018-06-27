@@ -51,27 +51,20 @@ public class CalculateNewPosition extends VisitorAirplane {
 
             value = new Coordinate(newX, newY);
             
-            if (airplane.getId() != 0) {
-                int cord1 = (int) x1 / 50;
-                int cord2 = (int) y1 / 50;
-                int cord3 = (int) newX / 50;
-                int cord4 = (int) newY / 50;
+            if (airplane.getId() != 99) {
+                int div = 35;
+                int sumX = 100;
+                int sumY = 280;
+                
+                int cord1 = (int) x1 / div;
+                int cord2 = (int) y1 / div;
+                int cord3 = (int) newX / div;
+                int cord4 = (int) newY / div;
 
                 Graphics g = Main.panel.getGraphics();
                 g.setColor(getColor(airplane));
 
-                if (x2 >= 0 && y2 >= 0) {
-                    g.drawLine(cord1 + 200, cord2 + 200, cord3 + 200, cord4 + 200);
-                }
-                else if (x2 > 0 && y2 <= 0) {
-                    g.drawLine(cord1, cord2, cord3, cord4);
-                }
-                else if (x2 <= 0 && y2 <= 0) {
-                    g.drawLine(cord1, cord2 + 200, cord3, cord4 + 200);
-                }
-                else {
-                    g.drawLine(cord1 + 200, cord2, cord3 + 200, cord4);
-                }
+                g.drawLine(cord1 + sumX, cord2+ sumY, cord3 + sumX, cord4+ sumY);
             }
         }
         else {
@@ -84,7 +77,7 @@ public class CalculateNewPosition extends VisitorAirplane {
             case 1: return Color.BLUE;
             case 2: return Color.RED;
             case 3: return Color.GREEN;
-            case 4: return Color.ORANGE;
+            case 4: return Color.MAGENTA;
             case 5: return Color.LIGHT_GRAY;
         }
         return Color.BLACK;

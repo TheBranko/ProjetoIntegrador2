@@ -100,8 +100,8 @@ public class TowerControl {
         LandingRoute route = data.getLandingRoute();
         
         boolean lowEnough = 
-            Math.abs(Math.abs(plane.getCurrentLocation().getLatitude()) - Math.abs(route.getEntryLocation().getLatitude())) <= 2000
-         && Math.abs(Math.abs(plane.getCurrentLocation().getLongitude()) - Math.abs(route.getEntryLocation().getLongitude())) <= 2000;
+            Math.abs(Math.abs(plane.getCurrentLocation().getLatitude()) - Math.abs(route.getEntryLocation().getLatitude())) <= 300
+         && Math.abs(Math.abs(plane.getCurrentLocation().getLongitude()) - Math.abs(route.getEntryLocation().getLongitude())) <= 300;
 
         boolean airplaneLanding = route.getLastAirplaneInto() != null;
         

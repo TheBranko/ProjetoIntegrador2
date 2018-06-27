@@ -28,6 +28,8 @@ public class Main {
                     super.paintComponent(g);
                     g.setColor(Color.WHITE);
                     g.fillRect(0, 0, 600, 600);
+                    g.setColor(Color.BLACK);
+                    g.fillOval(293, 275, 10, 10);
                 }
                 
             };
