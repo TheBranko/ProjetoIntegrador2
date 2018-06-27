@@ -12,7 +12,7 @@ import br.udesc.ceavi.model.routes.RouteDirector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+//import java.util.Random;
 
 /**
  *
@@ -29,6 +29,14 @@ public class ControllerData {
 
     private RouteDirector routeDirector;
     private RouteBuilder routeBuilder;
+    
+//    private int[] dados = {4, 6, 2, 8, 1}; //ruim
+    
+    private int[] dados = {1,2,3,4,5}; //funfa
+//    private int[] dados = {1,2,3,8,5}; //funfa
+    
+//    private int[] dados = {3,4,5,0,9}; //caso que devia aumentar a velox também, nao so diminuir
+    private int cont = 0;
 
     public ControllerData() throws IOException {
         airplaneBuilder = new AirplaneBuilder();
@@ -36,14 +44,17 @@ public class ControllerData {
         
         buildApproachRoutes();
         buildLandingRoutes();
+
     }
-
+    
     public Airplane buildAirplane() throws IOException, Exception {
-        Random random = new Random();
+        //Random random = new Random();
         
-
         if (airplaneBuilder.readLine()) {
-            airplaneDirector.build(approachRoutes.remove(random.nextInt(approachRoutes.size() - 1)));
+            //random.nextInt(approachRoutes.size() - 1);
+            
+            airplaneDirector.build(approachRoutes.get(dados[cont]));
+            cont++;
             try {
                 return airplaneBuilder.getAirplane();
             } finally {
@@ -54,17 +65,6 @@ public class ControllerData {
         }
     }
 
-//    private void buildAllAirplanes() throws IOException {
-//        Random random = new Random();
-//        airplaneBuilder = new AirplaneBuilder();
-//        airplaneDirector = new AirplaneDirector(airplaneBuilder);
-//
-//        while (airplaneBuilder.readLine()) {
-//            airplaneDirector.build(approachRoutes.get(random.nextInt(approachRoutes.size() - 1)));
-//            airplanes.add(airplaneBuilder.getAirplane());
-//            airplaneBuilder.startsNewAirplane();
-//        }
-//    }
     private void buildApproachRoutes() throws IOException {
         routeBuilder = new ApproachRouteBuilder();
         routeDirector = new RouteDirector(routeBuilder);
@@ -91,5 +91,4 @@ public class ControllerData {
     public LandingRoute getLandingRoute() {
         return landingRoutes.get(0);
     }
-
 }

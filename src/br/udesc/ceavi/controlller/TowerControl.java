@@ -68,6 +68,7 @@ public class TowerControl {
 
                 //if the plane it's on the ground, start counting the time to park
                 if (a.getRoute() instanceof LandingRoute && planeMadeIt) {
+                    
                     double currentTime = timeOnLandingRoute.getOrDefault(a.getId(), (double) 0);
                     double newTime = currentTime + Utils.getInstance().getUpdateInterval();
 
@@ -84,9 +85,10 @@ public class TowerControl {
 
             timeList.removeAll(removeList);
             removeList.clear();
-//            Thread.sleep(1000);
+            Thread.sleep(1000);
         }
         System.out.println("Todos aviões pousaram");
+        System.exit(0);
     }
 
     /**
@@ -98,20 +100,20 @@ public class TowerControl {
         LandingRoute route = data.getLandingRoute();
         
         boolean lowEnough = 
-            Math.abs(Math.abs(plane.getCurrentLocation().getLatitude()) - Math.abs(route.getEntryLocation().getLatitude())) <= 300
-         || Math.abs(Math.abs(plane.getCurrentLocation().getLongitude()) - Math.abs(route.getEntryLocation().getLongitude())) <= 300;
+            Math.abs(Math.abs(plane.getCurrentLocation().getLatitude()) - Math.abs(route.getEntryLocation().getLatitude())) <= 2000
+         && Math.abs(Math.abs(plane.getCurrentLocation().getLongitude()) - Math.abs(route.getEntryLocation().getLongitude())) <= 2000;
 
         boolean airplaneLanding = route.getLastAirplaneInto() != null;
-
+        
         //theres enough for other plane to get into the landing route if the time the second airplane it's bigger
         //than the time to the first one touch the ground and park
         boolean enoughBetweenTime = airplaneLanding
-                && (route.getLastAirplaneInto().getTimeToRouteEnd() - plane.getTimeToRouteEnd())
+                && ((plane.getTimeToRouteEnd() + LandingRoute.TOTAL_TIME_PARKING) - route.getLastAirplaneInto().getTimeToRouteEnd())
                 > LandingRoute.TOTAL_TIME_PARKING;
-
+        
         //the new airplane can get into the landing route if there's no other airplane
         //or if the time to land of the current plane it's bigger then the time of the new plane to land
-        if (lowEnough && (!airplaneLanding || enoughBetweenTime)) {
+        if (lowEnough && (!airplaneLanding || enoughBetweenTime) && !route.equals(plane.getRoute())) {
             System.out.println(plane.getCurrentLocation().getLongitude() + " " + plane.getCurrentLocation().getLatitude());
             System.out.println(String.format("Avião %s entrou da rota de pouso", plane.getId()));
             plane.setRoute(data.getLandingRoute());
